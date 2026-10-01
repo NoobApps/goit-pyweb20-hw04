@@ -108,8 +108,7 @@ def run_http_server():
 
 
 if __name__ == '__main__':
-    t1 = threading.Thread(target=run_http_server)
-    t1.start()
-    t2=threading.Thread(target=run_socket_server,args=(SOCKET_HOST, SOCKET_PORT))
-    t2.start()
-    
+    webserver = threading.Thread(target=run_http_server)
+    webserver.start()
+    socket_server = threading.Thread(target=run_socket_server, args=(SOCKET_HOST, SOCKET_PORT))
+    socket_server.start()
