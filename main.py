@@ -37,7 +37,7 @@ class Handler(BaseHTTPRequestHandler):
         client_socket.sendto(post_data, (SOCKET_HOST, SOCKET_PORT))
         client_socket.close()
         self.send_response(302)
-        self.send_header('Location', '/message')
+        self.send_header('Location', '/')
         self.end_headers()
 
     def send_html(self, filename, status_code=200):
@@ -63,11 +63,12 @@ def save_data_from_form(data):
     try:
         parse_dict = {key: value for key, value in [el.split('=') for el in parse_data.split('&')]}
         if (fp:=Path('storage/data.json')).exists():
-            with open(fp, 'r+', encoding='utf-8') as file:
+            with open(fp, 'r', encoding='utf-8') as file:
                 try:
                     jsondata = json.load(file)
                 except json.JSONDecodeError:
                     jsondata = {}
+            with open(fp, 'w', encoding='utf-8') as file:
                 key = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
                 jsondata[key] = parse_dict
                 json.dump(jsondata, file, ensure_ascii=False, indent=4)
