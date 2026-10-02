@@ -84,7 +84,7 @@ def save_data_from_form(data):
 def run_socket_server(host, port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_socket.bind((host, port))
-    print(f"Socket server is running on {host}:{port}")
+    logging.info(f"Socket server is running on {host}:{port}")
     
     try:
         while True:
@@ -98,7 +98,7 @@ def run_socket_server(host, port):
 def run_http_server():
     address = ('localhost', 8080)
     http_server = HTTPServer(address, Handler)
-    print(f"HTTP server is running on {address[0]}:{address[1]}")
+    logging.info(f"HTTP server is running on {address[0]}:{address[1]}")
     try:
         http_server.serve_forever()
     except KeyboardInterrupt:
@@ -108,6 +108,7 @@ def run_http_server():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
     webserver = threading.Thread(target=run_http_server)
     webserver.start()
     socket_server = threading.Thread(target=run_socket_server, args=(SOCKET_HOST, SOCKET_PORT))
