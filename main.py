@@ -96,7 +96,7 @@ def run_socket_server(host, port):
         server_socket.close()
 
 def run_http_server():
-    address = ('0.0.0.0', 8080)
+    address = ('0.0.0.0', 3000)
     http_server = HTTPServer(address, Handler)
     logging.info(f"HTTP server is running on {address[0]}:{address[1]}")
     try:

@@ -10,6 +10,6 @@ VOLUME /app/storage
 
 COPY . .
 
-EXPOSE 8080
+EXPOSE 3000
 
 ENTRYPOINT ["python", "main.py"]
